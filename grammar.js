@@ -66,14 +66,56 @@ module.exports = grammar({
     decimal: $ => /[+-]?[0-9]*\.[0-9]+/,
     _string: $ => choice(
       $.string,
-     // $.x_string,
-     // $.n_string,
+      $.x_string,
+      $.z_string,
+      $.dbcs_string,
+      $.u_string,
+      $.ux_string,
+      $.n_string,
+      $.nx_string,
      // $.h_string
     ),
 
     string: $ => choice(
       /('([^'\n]|'')*')+/,
       /("([^"\n]|"")*")+/,
+    ),
+
+    x_string: $ => choice(
+      /X('([^'\n]|'')*')+/,
+      /X("([^"\n]|"")*")+/,
+    ),
+
+    z_string: $ => choice(
+      /Z('([^'\n]|'')*')+/,
+      /Z("([^"\n]|"")*")+/,
+    ),
+    
+    dbcs_literal: $ => choice(
+      /G('<([^'\n]|'')*>')+/,
+      /G("<([^"\n]|"")*>")+/,
+      /N('<([^'\n]|'')*>')+/,
+      /N("<([^"\n]|"")*>")+/,
+    ),
+
+    u_string: $ => choice(
+      /U('([^'\n]|'')*')+/,
+      /U("([^"\n]|"")*")+/,
+    ),
+
+    ux_string: $ => choice(
+      /UX('([^'\n]|'')*')+/,
+      /UX("([^"\n]|"")*")+/,
+    ),
+
+    n_string: $ => choice(
+      /N('([^'\n]|'')*')+/,
+      /N("([^"\n]|"")*")+/,
+    ),
+
+    nx_string: $ => choice(
+      /NX('([^'\n]|'')*')+/,
+      /NX("([^"\n]|"")*")+/,
     ),
 
     _IDENTIFICATION: $ => /[iI][dD][eE][nN][tT][iI][fF][iI][cC][aA][tT][iI][oO][nN]/,
